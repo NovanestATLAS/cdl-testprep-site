@@ -4,3 +4,16 @@
 
 /_astro/*
   Cache-Control: public, max-age=31536000, immutable
+
+# The questions-and-answers PDFs repeat their HTML page: point search engines at the page (canonical Link header).
+/cdl-practice-test/:test/questions-and-answers.pdf
+  Link: <https://cdl-testprep.com/cdl-practice-test/:test/questions-and-answers/>; rel="canonical"
+  Cache-Control: public, max-age=86400
+
+# Cloudflare's own addresses for this project (<project>.pages.dev and per-deployment previews) must not compete
+# with cdl-testprep.com in search results.
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
+
+https://:version.:project.pages.dev/*
+  X-Robots-Tag: noindex
